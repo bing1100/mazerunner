@@ -43,7 +43,7 @@ possible = 0
 #  is no solution
 # k is the number of choices for current step, and possible is the number of possible
 # combinations up to this step choice
-def maze_run(k):
+def maze_run(k,maze_step):
     
     # Use global variables so that values are kept
     global possible 
@@ -60,7 +60,7 @@ def maze_run(k):
             # Note: We can relate real choices to the value of choice_step
             store[c_length] = choice_step
             
-            if c_length == maze_length:
+            if maze_step_choice(next_step(maze_step,choice_step))==0:
                 # sees if current stored solution is correct
                 pass_val = maze_pass(store)
                 
@@ -74,7 +74,7 @@ def maze_run(k):
                 
             # Increase the current length by 1
             c_length += 1
-            maze_run(maze_step_choice(c_length),possible*maze_step_choice(c_length))
+            maze_run(maze_step_choice(next_step(maze_step,choice_step)),next_step(maze_step,choice_step))
             
         if pass_val == 2:
             return "No Solution"
